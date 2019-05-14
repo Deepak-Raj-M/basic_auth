@@ -9,6 +9,9 @@ var cors = require('cors');
 var app = express();
 
 app.use(cors());
+
+const db = require('./database/db_conf');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
