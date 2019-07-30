@@ -3,7 +3,7 @@ var router = express.Router();
 
 const userTable = require('../database/users');
 
-router.post('/add_user', async function(req, res, next) {
+router.post('/register', async function(req, res, next) {
 	try{
 		const params = req.body;
 		var already_exists = await userTable.findOne({username:params.username});
