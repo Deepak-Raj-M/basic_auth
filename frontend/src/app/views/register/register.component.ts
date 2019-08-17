@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-  	this.apiHelper.postData('add_user',this.regForm.value).subscribe((data:any)=>{
+  	this.apiHelper.postData('register',this.regForm.value).subscribe((data:any)=>{
   		alert(data.message);
   		if(data.status == true){
   			this.router.navigate(['/login']);
