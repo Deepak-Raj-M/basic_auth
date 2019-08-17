@@ -1,0 +1,76 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="https://image.flaticon.com/icons/svg/17/17004.svg" id="icon" alt="User Icon" style="height: 70px;width: 70px;" />
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="regForm" (ngSubmit)="regForm.valid && register()">
+      <input type="text" formControlName="username" class="fadeIn second" placeholder="Username" required="">
+      <div *ngIf="getField('username').invalid && (getField('username').dirty || getField('username').touched)" style="color: red;font-size: 14px;">
+        <div *ngIf="getField('username').errors.required">
+          Username is required.
+        </div>
+        <div *ngIf="getField('username').errors.minlength">
+          Minimum length is 5
+        </div>
+        <div *ngIf="getField('username').errors.maxlength">
+          maximum length is 15
+        </div>
+      </div>
+      <input type="text" formControlName="fullName" class="fadeIn second" placeholder="Full name">
+      <div *ngIf="getField('fullName').invalid && (getField('fullName').dirty || getField('fullName').touched)" style="color: red;font-size: 14px;">
+        <div *ngIf="getField('fullName').errors.required">
+          Full name is required.
+        </div>
+        <div *ngIf="getField('fullName').errors.minlength">
+          Minimum length is 5
+        </div>
+        <div *ngIf="getField('fullName').errors.maxlength">
+          maximum length is 15
+        </div>
+      </div>
+      <input type="text" formControlName="dob" class="fadeIn second" placeholder="Date of birth">
+      <div *ngIf="getField('dob').invalid && (getField('dob').dirty || getField('dob').touched)" style="color: red;font-size: 14px;">
+        <div *ngIf="getField('dob').errors.required">
+          Date of birth is required.
+        </div>
+        <div *ngIf="getField('dob').errors.minlength">
+          Minimum length is 5
+        </div>
+        <div *ngIf="getField('dob').errors.maxlength">
+          maximum length is 15
+        </div>
+      </div>
+      <input type="password" formControlName="paswd" class="fadeIn third" placeholder="Password">
+      <div *ngIf="getField('paswd').invalid && (getField('paswd').dirty || getField('paswd').touched)" style="color: red;font-size: 14px;">
+        <div *ngIf="getField('paswd').errors.required">
+          Password is required.
+        </div>
+        <div *ngIf="getField('paswd').errors.minlength">
+          Minimum length is 5
+        </div>
+        <div *ngIf="getField('paswd').errors.maxlength">
+          maximum length is 15
+        </div>
+      </div>
+      <input type="password" formControlName="retype_paswd" class="fadeIn third" placeholder="Retype password">
+      <div *ngIf="getField('retype_paswd').invalid && (getField('retype_paswd').dirty || getField('retype_paswd').touched)" style="color: red;font-size: 14px;">
+        <div *ngIf="getField('retype_paswd').errors.required">
+          This field is required.
+        </div>
+        <div *ngIf="getField('retype_paswd').errors.mustMatch">Passwords must match</div>
+      </div>
+      <input type="submit" class="fadeIn fourth" [disabled]="regForm.pristine || regForm.invalid" value="Register">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      Already have an account ? <a class="underlineHover" routerLink="/login">Login</a>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="https://image.flaticon.com/icons/svg/17/17004.svg" id="icon" alt="User Icon" style="height: 70px;width: 70px;" />
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onSubmit()">
+      <input type="text" formControlName="username" class="fadeIn second" placeholder="Username" required="">
+      <div *ngIf="getField('username').invalid && (getField('username').dirty || getField('username').touched)" style="color: red;font-size: 14px;">
+        <div *ngIf="getField('username').errors.required">
+          Username is required.
+        </div>
+        <div *ngIf="getField('username').errors.minlength">
+          Minimum length is 5
+        </div>
+        <div *ngIf="getField('username').errors.maxlength">
+          maximum length is 15
+        </div>
+      </div>
+
+      <input type="password" formControlName="paswd" class="fadeIn third" placeholder="Password">
+      <div *ngIf="getField('paswd').invalid && (getField('paswd').dirty || getField('paswd').touched)" style="color: red;font-size: 14px;">
+        <div *ngIf="getField('paswd').errors.required">
+          Password is required.
+        </div>
+        <div *ngIf="getField('paswd').errors.minlength">
+          Minimum length is 5
+        </div>
+        <div *ngIf="getField('paswd').errors.maxlength">
+          maximum length is 15
+        </div>
+      </div>
+
+      <input type="submit" class="fadeIn fourth" [disabled]="loginForm.pristine || loginForm.invalid" value="Login">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      Don't have an account ? <a class="underlineHover" routerLink="/register">Register</a>
+    </div>
+
+  </div>
+</div>
