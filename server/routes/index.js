@@ -51,6 +51,7 @@ router.post('/login', async function(req, res, next) {
 });
 
 router.post('/get_user/:id', async function(req, res, next) {
+	err = 'Something went wrong';
 	try{
 		const id = req.params.id;
 		var exists = await userTable.findOne({_id:id});
@@ -58,7 +59,6 @@ router.post('/get_user/:id', async function(req, res, next) {
 		res.send({status:true,message:'',result:exists});
 	}
 	catch(e){
-		err = 'Something went wrong';
 		if(e == 'not_found')
 			err = 'No records found';
 		res.send({status:false,message:err});
