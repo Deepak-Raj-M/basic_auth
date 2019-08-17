@@ -8,14 +8,14 @@ export class CommonService {
   constructor() { }
 
   isLoggedin(){
-  	if(localStorage.getItem('user')){
-  		return localStorage.getItem('user');
+  	if(localStorage.getItem('session')){
+  		return localStorage.getItem('session');
   	}
   	return false;
   }
 
   setSesstion(id){
-  	localStorage.setItem('user',id);
+  	localStorage.setItem('session',id);
   	return true;
   }
 

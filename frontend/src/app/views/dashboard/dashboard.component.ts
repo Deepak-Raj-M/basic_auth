@@ -15,14 +15,17 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
   	this.session = this.common.isLoggedin()
-  	this.api.postData('get_user/'+this.session,{}).subscribe((data:any)=>{
+  	this.api.postData('dashboard/',{session:this.session}).subscribe((data:any)=>{
   		if(data && data.status == true){
   			this.userDet = data.result;
   		}
+      else{
+        this.logout();
+      }
   	});
   }
 
-  onClick(){
+  logout(){
   	this.common.logout();
   	this.router.navigate(['/login']);
   }

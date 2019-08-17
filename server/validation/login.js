@@ -2,16 +2,13 @@ const Validator = require("validator");
 const isEmpty = require("is-empty");
 module.exports = function(data){
 	var errors = [];
-	data.email = isEmpty(data.email)?'':data.email;
-	data.password = isEmpty(data.password)?'':data.password;
-	if(Validator.isEmpty(data.email,{ ignore_whitespace:true})){
-		errors.push('Email is required');
+	data.username = isEmpty(data.username)?'':data.username;
+	data.paswd = isEmpty(data.paswd)?'':data.paswd;
+	if(Validator.isEmpty(data.username,{ ignore_whitespace:true})){
+		errors.push('Username is required');
 	}
-	if(!Validator.isEmail(data.email)){
-    errors.push("Please enter a valid email");
-	}
-	if(Validator.isEmpty(data.password,{ ignore_whitespace:true})){
-		errors.push('Password is required');
+	if(Validator.isEmpty(data.paswd,{ ignore_whitespace:true})){
+		errors.push('paswd is required');
 	}
   return {errors:errors,valid:isEmpty(errors)};
 }

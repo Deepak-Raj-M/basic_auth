@@ -19,14 +19,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   	this.loginForm = this.fb.group({
       username: new FormControl('',[
-					Validators.required,
-					Validators.minLength(5),
-					Validators.maxLength(15)
+				Validators.required,
+				Validators.minLength(5),
+				Validators.maxLength(15)
 			]),
 			paswd : new FormControl('',[
-					Validators.required,
-					Validators.minLength(5),
-					Validators.maxLength(15)
+				Validators.required,
+				Validators.minLength(5),
+				Validators.maxLength(15)
 			]),
     });
   }

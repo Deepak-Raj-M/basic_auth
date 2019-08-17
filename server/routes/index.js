@@ -6,6 +6,10 @@ const userTable = require('../database/users');
 const loginValidation = require('../validation/login');
 const registerValidation = require('../validation/register');
 
+var jwt = require('jsonwebtoken');
+const config = require('../helpers/config');
+const helper = require('../helpers/common');
+
 var err;
 
 router.post('/register', async function(req, res, next) {
@@ -41,26 +45,28 @@ router.post('/login', async function(req, res, next) {
 		}
 		var exists = await userTable.findOne(params);
 		if(!exists) throw 'not_found';
-		res.send({status:true,message:'Valid credentials. Logging you in...',result:exists._id});
+		var token = jwt.sign({ user_id: exists._id }, config.jwtSecret);
+		res.send({status:true,message:'Valid credentials. Logging you in...',result:token});
 	}
 	catch(e){
+		// console.log(e);
 		if(e == 'not_found')
 			err = 'Username or password is invalid';
 		res.send({status:false,message:err});
 	}
 });
 
-router.post('/get_user/:id', async function(req, res, next) {
+router.post('/dashboard', async function(req, res, next) {
 	err = 'Something went wrong';
 	try{
-		const id = req.params.id;
-		var exists = await userTable.findOne({_id:id});
+		var session = helper.verifySession(req.body.session,config.jwtSecret);
+		var exists = await userTable.findOne({_id:session.user_id});
 		if(!exists) throw 'not_found';
 		res.send({status:true,message:'',result:exists});
 	}
 	catch(e){
-		if(e == 'not_found')
-			err = 'No records found';
+		if(e == 'invalid')
+			err = 'Invalid session.';
 		res.send({status:false,message:err});
 	}
 });
